@@ -3,7 +3,7 @@
 <html lang="ch">
 <head>
     <meta charset="utf-8" />
-    <title> | K-ON!!!</title>
+    <title>Categories: LeetCode | K-ON!!!</title>
     <meta name="author" content="Coiness" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -37,10 +37,6 @@
 
 
 <script src="/js/lib/preview.js"></script>
-
-
-
-
 
 
 
@@ -154,85 +150,70 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1></h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/9/14
+            <div id="archives">
+    
+    <div class="categories-tags">
+        
+        
+        
+        <span>
+            <a href="/categories/TCP-IP/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                TCP/IP
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/categories/LeetCode/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                LeetCode
+            </a>
+        </span>
+        
+        
+        
+        
+        
+        <span>
+            <a href="/categories/LeetCode/Array/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                Array
+            </a>
         </span>
         
         
     </div>
     
-    <div class="content" v-pre>
-        <h1 id="第二章-Internet地址结构"><a href="#第二章-Internet地址结构" class="headerlink" title="第二章 Internet地址结构"></a>第二章 Internet地址结构</h1><p>本章没多少重点&#x2F;难点内容，同时改变了原先第一章的详尽的写法，只挑选了一些笔者认为应该掌握的知识。</p>
-<span id="more"></span>
-
-<h4 id="IPv4和IPv6基本知识"><a href="#IPv4和IPv6基本知识" class="headerlink" title="IPv4和IPv6基本知识"></a>IPv4和IPv6基本知识</h4><p>IPv4：    32位二进制    点分四组表示    四组    每组一个字节</p>
-<p>IPv6：    128位二进制    十六进制表示    八块    每块两个字节</p>
-<p>IPv6规则：</p>
-<ol>
-<li>前导的0必须压缩</li>
-<li>：：可以省略多个为0的块，但是只能用于影响最大的地方（相同则顺序靠前的块被替换）</li>
-<li>a到f的十六进制数字应该用小写表示</li>
-</ol>
-<p><strong>IPv4</strong>：192.168.1.1</p>
-<p><strong>IPv6</strong>：2001:db8:42::1</p>
-<h4 id="分类寻址"><a href="#分类寻址" class="headerlink" title="分类寻址"></a>分类寻址</h4><p>当然可以：</p>
-<ul>
-<li><strong>A类</strong>：1.0.0.0 - 126.255.255.255，网络位8位，私有10.0.0.0&#x2F;8</li>
-<li><strong>B类</strong>：128.0.0.0 - 191.255.255.255，网络位16位，私有172.16.0.0&#x2F;12</li>
-<li><strong>C类</strong>：192.0.0.0 - 223.255.255.255，网络位24位，私有192.168.0.0&#x2F;16</li>
-<li><strong>D类</strong>：224.0.0.0 - 239.255.255.255，多播</li>
-<li><strong>E类</strong>：240.0.0.0 - 255.255.255.255，保留</li>
-</ul>
-<p>特殊地址：</p>
-<ul>
-<li><strong>环回</strong>：127.0.0.0 - 127.255.255.255</li>
-<li><strong>广播</strong>：255.255.255.255</li>
-</ul>
-<h4 id="网络号、子网号和主机号"><a href="#网络号、子网号和主机号" class="headerlink" title="网络号、子网号和主机号"></a>网络号、子网号和主机号</h4><p>192.168.0.10&#x2F;25</p>
-<p>网络号：192.168.0.0</p>
-<p>子网号：192.168.0.0&#x2F;25</p>
-<p>主机号：10</p>
-<p><strong>网络号根据地址类别来求，子网号则是根据子网掩码来求，子网号+主机号就是IP地址</strong></p>
-<p>子网掩码为n，说明前n位是子网号。</p>
-<p>192.168.0.10&#x2F;25    子网192.168.0.0&#x2F;25上主机号为10的ip地址</p>
-<p>192.168.0.138&#x2F;25    子网192.168.0.128&#x2F;25上主机号为10的ip地址</p>
-<h4 id="VSML"><a href="#VSML" class="headerlink" title="VSML"></a>VSML</h4><p>VSML是一种允许在同一网络中使用<strong>不同子网掩码</strong>划分子网的技术</p>
-<p> 可以将一个网络划分为多个大小不一的子网，提高ip地址的利用率。</p>
-<h4 id="广播地址"><a href="#广播地址" class="headerlink" title="广播地址"></a>广播地址</h4><p>掩码取反与地址继续或运算(<em>其实就是子网号</em>)，然后将主机部分全部构建为1.</p>
-<p>也是就说，广播地址就是该子网中主机号最大的那个地址</p>
-<h4 id="CIDR"><a href="#CIDR" class="headerlink" title="CIDR"></a>CIDR</h4><p>另一种网络地址表示方式，<strong>打破了传统的IP分类</strong>。</p>
-<p>CIDR掩码跟子网掩码非常相似，非常非常。感觉是一个多余的概念</p>
-<h4 id="聚合"><a href="#聚合" class="headerlink" title="聚合"></a>聚合</h4><p>聚合是将多个连续网络子网合并为一个更大的子网，以简化路由表。</p>
-<p>可以通过将拓扑结构上相关的路由节点的ip地址分配为相似的前缀来实现。</p>
-<p><strong>举例</strong></p>
-<ul>
-<li>将以下子网：<ul>
-<li>192.168.0.0&#x2F;24</li>
-<li>192.168.1.0&#x2F;24</li>
-<li>192.168.2.0&#x2F;24</li>
-<li>192.168.3.0&#x2F;24</li>
-</ul>
-</li>
-<li>聚合为：192.168.0.0&#x2F;22</li>
-</ul>
-<p><strong>注意</strong>：仅适用于连续的网络块。</p>
-<p><strong>与IP地址相关的攻击：欺骗</strong></p>
-
+    <div class="timeline">
+        <div class="timeline-tail"></div>
+        <div class="timeline-content">
+            <div class="item-time">2024/9/15</div>
+            <a href="/2024/09/15/%E7%AE%97%E6%B3%95%E6%97%A5%E8%AE%B01/">
+                <h3>算法日记-1 189.轮换数组</h3>
+            </a>
+            <div class="info">
+                
+                <span class="category">
+                    <a href="/categories/LeetCode/">
+                        <span class="icon">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </span>
+                        LeetCode
+                    </a>
+                </span>
+                
+                
+            </div>
+        </div>
     </div>
-    
-    
-    
-    
-    
-    
     
 </div>
 
@@ -264,12 +245,6 @@
         
     </div>
     <script src="/js/main.js"></script>
-    
-    
-
-
-
-
     
 </body>
 </html>
