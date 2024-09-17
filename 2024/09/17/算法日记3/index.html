@@ -3,7 +3,7 @@
 <html lang="ch">
 <head>
     <meta charset="utf-8" />
-    <title>Archives | K-ON!!!</title>
+    <title>算法日记-3 724.寻找数组的中心下标 | K-ON!!!</title>
     <meta name="author" content="Coiness" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -150,127 +154,60 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            
-<div id="archives">
-    
-    <div id="timeline-wrap" ref="timeline">
+            <div class="article">
+    <div>
+        <h1>算法日记-3 724.寻找数组的中心下标</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/9/17
+        </span>
         
-        <div class="timeline" data-title="算法日记-1189.轮换数组">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/9/15</div>
-                <a href="/2024/09/15/%E7%AE%97%E6%B3%95%E6%97%A5%E8%AE%B01/">
-                    <h3>算法日记-1 189.轮换数组</h3>
-                </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/LeetCode/">
-                            <span class="icon">
-                                <i class="fa-solid fa-bookmark fa-fw"></i>
-                            </span>
-                            LeetCode
-                        </a>
-                    </span>
-                    
-                    
-                </div>
-            </div>
-        </div>
+        <span class="category">
+            <a href="/categories/LeetCode/">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                LeetCode
+            </a>
+        </span>
         
-        <div class="timeline" data-title="第一章">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/9/15</div>
-                <a href="/2024/09/15/%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E6%A6%82%E8%BF%B0/">
-                    <h3>第一章</h3>
-                </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/TCP-IP/">
-                            <span class="icon">
-                                <i class="fa-solid fa-bookmark fa-fw"></i>
-                            </span>
-                            TCP/IP
-                        </a>
-                    </span>
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="第二章internet地址结构">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/9/15</div>
-                <a href="/2024/09/15/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20Internet%E5%9C%B0%E5%9D%80%E7%BB%93%E6%9E%84/">
-                    <h3>第二章 Internet地址结构</h3>
-                </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/TCP-IP/">
-                            <span class="icon">
-                                <i class="fa-solid fa-bookmark fa-fw"></i>
-                            </span>
-                            TCP/IP
-                        </a>
-                    </span>
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="算法日记-266加一">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/9/17</div>
-                <a href="/2024/09/17/%E7%AE%97%E6%B3%95%E6%97%A5%E8%AE%B02/">
-                    <h3>算法日记-2 66加一</h3>
-                </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/LeetCode/">
-                            <span class="icon">
-                                <i class="fa-solid fa-bookmark fa-fw"></i>
-                            </span>
-                            LeetCode
-                        </a>
-                    </span>
-                    
-                    
-                </div>
-            </div>
-        </div>
-        
-        <div class="timeline" data-title="算法日记-3724.寻找数组的中心下标">
-            <div class="timeline-tail"></div>
-            <div class="timeline-content">
-                <div class="item-time">2024/9/17</div>
-                <a href="/2024/09/17/%E7%AE%97%E6%B3%95%E6%97%A5%E8%AE%B03/">
-                    <h3>算法日记-3 724.寻找数组的中心下标</h3>
-                </a>
-                <div class="info">
-                    
-                    <span class="category">
-                        <a href="/categories/LeetCode/">
-                            <span class="icon">
-                                <i class="fa-solid fa-bookmark fa-fw"></i>
-                            </span>
-                            LeetCode
-                        </a>
-                    </span>
-                    
-                    
-                </div>
-            </div>
-        </div>
         
     </div>
+    
+    <div class="content" v-pre>
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-pivot-index/">LeetCode指路</a> 难度：简单</p>
+<span id="more"></span>
+
+<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><p>首先讲一下特殊情况</p>
+<p>当数组里面只有一个元素时，左右都是空和，为0，此时可以直接返回1。</p>
+<p>当数组里面的元素为2时，你可能会想，一边是空和，另一边是一个数组元素，这种情况一定不存在左右和相等的情况。然而并非如此，当数组元素为0时，两边就相等了。</p>
+<p>另外，由于数组中可能出现负数，所以打算两边同时向中间推进找中心下标的想法是行不通的。</p>
+<h5 id="方法1：暴力算法"><a href="#方法1：暴力算法" class="headerlink" title="方法1：暴力算法"></a>方法1：暴力算法</h5><p>遍历数组每个元素，遍历时，将其左边和与右边和进行计算。</p>
+<p>时间复杂度为O(n<sup>2</sup>)</p>
+<h5 id="方法2：暴力算法改良"><a href="#方法2：暴力算法改良" class="headerlink" title="方法2：暴力算法改良"></a>方法2：暴力算法改良</h5><p>仔细观察，我们可以发现，方法一的缺陷就是有部分数字算过了又再算了一次。</p>
+<p>当我们算完第n位后，在算第n+1位时，其实并不用重新将第1位至第n位的左右和重新算一遍。只需要将原本的suml加上第n位，sumr减去第n+1位。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> suml = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> sumr = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">    sumr += nums[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt; nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">    suml += nums[i<span class="number">-1</span>];</span><br><span class="line">    sumr -= nums[i];</span><br><span class="line">    <span class="keyword">if</span>(suml == sumr)&#123;</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">-1</span>;</span><br></pre></td></tr></table></figure>
+
+<h5 id="方法3：前缀和"><a href="#方法3：前缀和" class="headerlink" title="方法3：前缀和"></a>方法3：前缀和</h5><p>这个是LeetCode官方解法，跟方法2很像。</p>
+<p>整个数组可以分为 总数组 中心位置 左 右</p>
+<p>有等式 total &#x3D; nums[i] + suml + sumr ;</p>
+<p>在方法2中，suml &#x3D;&#x3D; sumr 是判断的标准。</p>
+<p>而在方法3中，利用了上面的等式，将sumr替换，判断标准变为</p>
+<p>suml &#x3D;&#x3D; total - nums[i] - suml  ;</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> suml = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> total = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">    total += nums[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i&lt; nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">    suml += nums[i<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">if</span>(<span class="number">2</span>*suml + nums[i] == total)&#123;</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">-1</span>;</span><br></pre></td></tr></table></figure>
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
 </div>
 
             <footer id="footer">
@@ -301,6 +238,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>
