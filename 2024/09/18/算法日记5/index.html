@@ -3,7 +3,7 @@
 <html lang="ch">
 <head>
     <meta charset="utf-8" />
-    <title>算法日记-2 66.加一 | K-ON!!!</title>
+    <title>算法日记-5 238.除自身以外数组的乘积 | K-ON!!!</title>
     <meta name="author" content="Coiness" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,14 +156,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>算法日记-2 66.加一</h1>
+        <h1>算法日记-5 238.除自身以外数组的乘积</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/9/17
+            2024/9/18
         </span>
         
         <span class="category">
@@ -191,15 +191,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/Array/" style="color: #03a9f4">
+                <a href="/tags/Array/" style="color: #ff7d73">
                     Array
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Easy/" style="color: #ff7d73">
-                    Easy
+                <a href="/tags/Medium/" style="color: #03a9f4">
+                    Medium
                 </a>
             </span>
             
@@ -208,22 +208,25 @@
     </div>
     
     <div class="content" v-pre>
-        <p><a href="%5Bhttps://leetcode.cn/problems/plus-one/description/">LeetCode指路</a> 难度：简单</p>
-<p>给定一个由 <strong>整数</strong> 组成的 <strong>非空</strong> 数组所表示的非负整数，在该数的基础上加一。</p>
-<p>最高位数字存放在数组的首位， 数组中每个元素只存储<strong>单个</strong>数字。</p>
-<p>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/product-of-array-except-self/description/">LeetCode指路</a> 难度：中等</p>
+<p>给你一个整数数组 <code>nums</code>，返回 数组 <code>answer</code> ，其中 <code>answer[i]</code> 等于 <code>nums</code> 中除 <code>nums[i]</code> 之外其余各元素的乘积 。</p>
+<p>题目数据 <strong>保证</strong> 数组 <code>nums</code>之中任意元素的全部前缀元素和后缀的乘积都在  <strong>32 位</strong> 整数范围内。</p>
+<p>请 <strong>不要使用除法</strong>，且在 <code>O(n)</code> 时间复杂度内完成此题。</p>
 <span id="more"></span>
 
-<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><p>该题比较简单</p>
-<p>需要注意的点是，当首位到末位都是9时，加一会使数字的位数增加，需要多加一位。</p>
-<p>（如：9 9 9 9 +1 &#x3D; 1 0 0 0 0）</p>
-<h5 id="方法1：找出最长的后缀9"><a href="#方法1：找出最长的后缀9" class="headerlink" title="方法1：找出最长的后缀9"></a>方法1：找出最长的后缀9</h5><p>对数组digits进行一次逆序遍历，找出第一个不为9的数字，将其加1并后续的所有元素置零</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = digits.<span class="built_in">size</span>()<span class="number">-1</span>;i &gt;= <span class="number">0</span>;i--)&#123;</span><br><span class="line">    <span class="keyword">if</span>(digits[i] != <span class="number">9</span>)&#123;</span><br><span class="line">        ++digits[i];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = i + <span class="number">1</span>;j &lt; digits.<span class="built_in">size</span>();j++)&#123;</span><br><span class="line">            digit[j] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> digits;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">ans</span><span class="params">(digits.size()<span class="number">+1</span>)</span></span>;</span><br><span class="line">ans[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">return</span> ans; </span><br></pre></td></tr></table></figure>
+<h4 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h4><p>首先，该题最难的点在于不能使用除法，同时要求时间复杂度为O(n)。那么该怎么办呢？</p>
+<h5 id="方法1：左右乘积列表"><a href="#方法1：左右乘积列表" class="headerlink" title="方法1：左右乘积列表"></a>方法1：左右乘积列表</h5><p>看着这道题，一开始会觉得难以下手，但是当我们想起之前在算法日记-3 724.寻找中心下标的时候，就会感到这两题是何等地相似。数组中的一个数将整个数组分为了三个区间，左边、右边和自己本身。</p>
+<p>既然暴力算法已经被明确禁止了，那么结合之前的经验，我们可以知道，要想提高速度，就应该重复利用计算结果，同时找出三个区间之间的关系。</p>
+<p>首先第一个想到的，是通过计算整个区间的乘积值，然后通过除法得出答案。然而除法是禁止的，所以pass掉。</p>
+<p>第二个，结果 &#x3D; 左区间乘积 * 右区间乘积。按照重复利用计算结果的思路，我们可以发现，当计算左区间时，n的左区间往往可以通过n-1的左区间和nums[n-1]相乘得到。按照这个思路，n的右区间可以通过 <del>n-1的右区间除以n得到</del> n+1的右区间和nums[n+1]相乘得到。</p>
+<p>从这个角度看，左区间和右区间其实是对称的。那么，我们只需要从左往右计算各个节点的左区间乘积，将结果存储起来。然后再从右往左计算各个节点的右区间，将结果存储起来。最后两个数组相乘得到新的数组，新的数组就是应该返回的答案了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line"><span class="function">std::vector&lt;<span class="type">int</span>&gt; <span class="title">beforSum</span><span class="params">(n,<span class="number">1</span>)</span></span>;</span><br><span class="line"><span class="function">std::vector&lt;<span class="type">int</span>&gt; <span class="title">afterSum</span><span class="params">(n,<span class="number">1</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">    beforSum[i] = beforSum[i<span class="number">-1</span>] * nums[i<span class="number">-1</span>];</span><br><span class="line">    afterSum[n-i<span class="number">-1</span>] = afterSum[n-i] * nums[n-i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">    beforeSum[i] *= afterSum[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> beforeSum;</span><br></pre></td></tr></table></figure>
 
-<h5 id="方法2：逢10进1"><a href="#方法2：逢10进1" class="headerlink" title="方法2：逢10进1"></a>方法2：逢10进1</h5><p>这是很正常的思路，方法1是Leetcode官方给的，对于它先遍历，然后将后续元素置零的处理，我本人不是很喜欢。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> end = digits.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">digits[end]++;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(end != <span class="number">0</span> &amp;&amp; digits[end] == <span class="number">10</span>)&#123;</span><br><span class="line">    digits[end] = <span class="number">0</span>;</span><br><span class="line">    digits[--end]++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(digits[<span class="number">0</span>] == <span class="number">10</span>)&#123;</span><br><span class="line">    digits[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    digits.<span class="built_in">insert</span>(digits.<span class="built_in">begin</span>()，<span class="number">1</span>）；</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> digits;</span><br></pre></td></tr></table></figure>
+<h5 id="方法2：优化-O-1-空间复杂度"><a href="#方法2：优化-O-1-空间复杂度" class="headerlink" title="方法2：优化-O(1)空间复杂度"></a>方法2：优化-O(1)空间复杂度</h5><p>在方法一种，我们已经通过返回beforeSum来减少空间复杂度了，那么能不能在计算出beforeSum后，不再使用额外的数组空间来计算出答案呢？答案是肯定的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> temp = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = n<span class="number">-2</span>; i &gt; <span class="number">0</span> ; i--)&#123;</span><br><span class="line">    temp *= nums[i];</span><br><span class="line">    beforSum[i<span class="number">-1</span>] *= temp;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>这个方法虽然直观，思路也很自然，缺点应该是缺少一点技巧性</p>
+<h5 id="方法3：双指针"><a href="#方法3：双指针" class="headerlink" title="方法3：双指针"></a>方法3：双指针</h5><p>这又是一个空间复杂度为O(1)的方法。跟方法2不同的是，它在一个for循环里同时计算左右区间的值并存储到ans中</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> templ = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> tempr = <span class="number">1</span>;</span><br><span class="line"><span class="function">std::vector&lt;<span class="type">int</span>&gt; <span class="title">ans</span><span class="params">(<span class="number">10</span>,<span class="number">1</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">    ans[i] *= templ;</span><br><span class="line">    ans[n-i<span class="number">-1</span>] *= tempr;</span><br><span class="line">    templ *= nums[i];</span><br><span class="line">    tempr *= nums[n-i<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
     </div>
     
