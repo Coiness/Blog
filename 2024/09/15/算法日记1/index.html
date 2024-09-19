@@ -184,21 +184,21 @@
             
             <span class="tag">
                 
-                <a href="/tags/LeetCode/" style="color: #03a9f4">
+                <a href="/tags/LeetCode/" style="color: #ff7d73">
                     LeetCode
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Array/" style="color: #00a596">
+                <a href="/tags/Array/" style="color: #03a9f4">
                     Array
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Medium/" style="color: #03a9f4">
+                <a href="/tags/Medium/" style="color: #00bcd4">
                     Medium
                 </a>
             </span>
@@ -226,7 +226,8 @@
 <p>最后将新建数组的值拷贝到原数组</p>
 <h5 id="环状替换"><a href="#环状替换" class="headerlink" title="环状替换"></a>环状替换</h5><p>首先，当想到了要尽可能地减少空间开销时，会很自然地从创造一个临时变量开始。我们最早接触的类似操作两数交换，就已经告诉了我们必须要一个临时变量来保证不会有数据在操作中丢失。</p>
 <p>好，现在已经有一个临时变量用来存储数据了，我们先从第一个数据开始吧。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp = nums[<span class="number">0</span>];</span><br><span class="line">std::<span class="built_in">swap</span>(temp,nums[(<span class="number">0</span>+k)%n])</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight cpp">temp = nums[<span class="number">0</span>];
+std::<span class="built_in">swap</span>(temp,nums[(<span class="number">0</span>+k)%n])</code></pre>
 
 <p>现在，temp里面存储的是被覆盖的nums[k]，而nums[k]存储的是位于正确位置的nums[0]</p>
 <p>下一步呢？下一步就是应该为储存在temp中的nums[k]找到它的家了。</p>
@@ -237,7 +238,15 @@
 <p>那么我们遍历了多少个数据呢？<strong>b&#x3D;lcm(n,k)&#x2F;k</strong></p>
 <p>我们每次都将一个数据放到正确的位置，那么我们这个操作需要操作多少次呢？</p>
 <p><strong>n&#x2F;b &#x3D; n*k&#x2F;lcm(n,k) &#x3D; gcd(n,k)</strong> *须知gcd(n,k) <em>lcm(n,k) &#x3D; nk</em></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>（<span class="type">int</span> i = <span class="number">0</span>;i &lt; std::<span class="built_in">gcd</span>(n,k);i++）&#123;</span><br><span class="line">    x = i;</span><br><span class="line">    temp = nums[x];        <span class="comment">//保存原始数据，否则会被覆盖</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; <span class="built_in">lcm</span>(n,k)/k;j++)&#123;</span><br><span class="line">        std::<span class="built_in">swap</span>(temp,nums[(x+k)%n]);</span><br><span class="line">        x = x + k;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight cpp"><span class="keyword">for</span>（<span class="type">int</span> i = <span class="number">0</span>;i &lt; std::<span class="built_in">gcd</span>(n,k);i++）&#123;
+    x = i;
+    temp = nums[x];        <span class="comment">//保存原始数据，否则会被覆盖</span>
+
+    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; <span class="built_in">lcm</span>(n,k)/k;j++)&#123;
+        std::<span class="built_in">swap</span>(temp,nums[(x+k)%n]);
+        x = x + k;
+    &#125;
+&#125;</code></pre>
 
 <p>第一个循环可以说，将数组分为了gcd(n,k)个集合，前gcd(n,k)个数据就是每个集合的开头。</p>
 <p>轮换的操作只可能在集合中变换。<em>因为存在循环</em></p>

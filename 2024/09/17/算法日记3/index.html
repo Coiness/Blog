@@ -184,21 +184,21 @@
             
             <span class="tag">
                 
-                <a href="/tags/LeetCode/" style="color: #ff7d73">
+                <a href="/tags/LeetCode/" style="color: #00bcd4">
                     LeetCode
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Array/" style="color: #03a9f4">
+                <a href="/tags/Array/" style="color: #ff7d73">
                     Array
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Easy/" style="color: #ffa2c4">
+                <a href="/tags/Easy/" style="color: #00bcd4">
                     Easy
                 </a>
             </span>
@@ -223,7 +223,23 @@
 <p>时间复杂度为O(n<sup>2</sup>)</p>
 <h5 id="方法2：暴力算法改良"><a href="#方法2：暴力算法改良" class="headerlink" title="方法2：暴力算法改良"></a>方法2：暴力算法改良</h5><p>仔细观察，我们可以发现，方法一的缺陷就是有部分数字算过了又再算了一次。</p>
 <p>当我们算完第n位后，在算第n+1位时，其实并不用重新将第1位至第n位的左右和重新算一遍。只需要将原本的suml加上第n位，sumr减去第n+1位。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> suml = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> sumr = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">    sumr += nums[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt; nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">    suml += nums[i<span class="number">-1</span>];</span><br><span class="line">    sumr -= nums[i];</span><br><span class="line">    <span class="keyword">if</span>(suml == sumr)&#123;</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">-1</span>;</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight cpp"><span class="type">int</span> suml = <span class="number">0</span>;
+<span class="type">int</span> sumr = <span class="number">0</span>;
+
+<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; nums.<span class="built_in">size</span>();i++)&#123;
+    sumr += nums[i];
+&#125;
+
+
+<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i &lt; nums.<span class="built_in">size</span>();i++)&#123;
+    suml += nums[i<span class="number">-1</span>];
+    sumr -= nums[i];
+    <span class="keyword">if</span>(suml == sumr)&#123;
+    <span class="keyword">return</span> i;
+&#125;
+&#125;
+
+<span class="keyword">return</span> <span class="number">-1</span>;</code></pre>
 
 <h5 id="方法3：前缀和"><a href="#方法3：前缀和" class="headerlink" title="方法3：前缀和"></a>方法3：前缀和</h5><p>这个是LeetCode官方解法，跟方法2很像。</p>
 <p>整个数组可以分为 总数组 中心位置 左 右</p>
@@ -231,7 +247,24 @@
 <p>在方法2中，suml &#x3D;&#x3D; sumr 是判断的标准。</p>
 <p>而在方法3中，利用了上面的等式，将sumr替换，判断标准变为</p>
 <p>suml &#x3D;&#x3D; total - nums[i] - suml  ;</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> suml = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> total = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">    total += nums[i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i&lt; nums.<span class="built_in">size</span>();i++)&#123;</span><br><span class="line">    suml += nums[i<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">if</span>(<span class="number">2</span>*suml + nums[i] == total)&#123;</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> <span class="number">-1</span>;</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight cpp">
+<span class="type">int</span> suml = <span class="number">0</span>;
+
+<span class="type">int</span> total = <span class="number">0</span>;
+
+
+<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; nums.<span class="built_in">size</span>();i++)&#123;
+    total += nums[i];
+&#125;
+
+<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>;i&lt; nums.<span class="built_in">size</span>();i++)&#123;
+    suml += nums[i<span class="number">-1</span>];
+    <span class="keyword">if</span>(<span class="number">2</span>*suml + nums[i] == total)&#123;
+    <span class="keyword">return</span> i;
+&#125;
+&#125;
+
+<span class="keyword">return</span> <span class="number">-1</span>;</code></pre>
 
     </div>
     

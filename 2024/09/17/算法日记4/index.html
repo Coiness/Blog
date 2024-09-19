@@ -184,21 +184,21 @@
             
             <span class="tag">
                 
-                <a href="/tags/LeetCode/" style="color: #00bcd4">
+                <a href="/tags/LeetCode/" style="color: #ffa2c4">
                     LeetCode
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Array/" style="color: #00a596">
+                <a href="/tags/Array/" style="color: #03a9f4">
                     Array
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Easy/" style="color: #ffa2c4">
+                <a href="/tags/Easy/" style="color: #ff7d73">
                     Easy
                 </a>
             </span>
@@ -213,7 +213,18 @@
 <span id="more"></span>
 
 <h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><h5 id="方法一：一次遍历"><a href="#方法一：一次遍历" class="headerlink" title="方法一：一次遍历"></a>方法一：一次遍历</h5><p>如题，通过遍历得出答案。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> temp = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(nums[i] == <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(++temp &gt; ans)&#123;</span><br><span class="line">            ans = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        temp = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight cpp"><span class="type">int</span> ans = <span class="number">0</span>;
+<span class="type">int</span> temp = <span class="number">0</span>;
+<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)&#123;
+    <span class="keyword">if</span>(nums[i] == <span class="number">1</span>)&#123;
+        <span class="keyword">if</span>(++temp &gt; ans)&#123;
+            ans = temp;
+        &#125;
+    &#125;
+    <span class="keyword">else</span>&#123;
+        temp = <span class="number">0</span>;
+&#125;
+&#125;</code></pre>
 
 <p>挺简单的，很多题解思路都大差不差。</p>
 

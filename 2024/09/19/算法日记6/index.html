@@ -3,7 +3,7 @@
 <html lang="ch">
 <head>
     <meta charset="utf-8" />
-    <title>Categories: TCP/IP | K-ON!!!</title>
+    <title>算法日记-6 498.对角线遍历 | K-ON!!!</title>
     <meta name="author" content="Coiness" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -37,6 +37,10 @@
 
 
 <script src="/js/lib/preview.js"></script>
+
+
+
+
 
 
 
@@ -150,27 +154,20 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div id="archives">
-    
-    <div class="categories-tags">
-        
-        
-        
-        <span>
-            <a href="/categories/TCP-IP/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                TCP/IP
-            </a>
+            <div class="article">
+    <div>
+        <h1>算法日记-6 498.对角线遍历</h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2024/9/19
         </span>
         
-        
-        
-        
-        
-        <span>
-            <a href="/categories/LeetCode/" style="background: #ffa2c4">
+        <span class="category">
+            <a href="/categories/LeetCode/">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
@@ -179,86 +176,109 @@
         </span>
         
         
-        
-        <span>
-            <a href="/categories/LeetCode/Array/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Array
-            </a>
+        <span class="tags">
+            <span class="icon">
+                <i class="fa-solid fa-tags fa-fw"></i>
+            </span>
+            
+            
+            <span class="tag">
+                
+                <a href="/tags/LeetCode/" style="color: #ff7d73">
+                    LeetCode
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Array/" style="color: #ffa2c4">
+                    Array
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Medium/" style="color: #ff7d73">
+                    Medium
+                </a>
+            </span>
+            
         </span>
-        
-        
-        
-        <span>
-            <a href="/categories/LeetCode/Array/Medium/" style="background: #03a9f4">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Medium
-            </a>
-        </span>
-        
-        
-        
-        <span>
-            <a href="/categories/LeetCode/Array/Easy/" style="background: #00a596">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                Easy
-            </a>
-        </span>
-        
         
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2024/9/15</div>
-            <a href="/2024/09/15/%E7%AC%AC%E4%BA%8C%E7%AB%A0%20Internet%E5%9C%B0%E5%9D%80%E7%BB%93%E6%9E%84/">
-                <h3>第二章 Internet地址结构</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/TCP-IP/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        TCP/IP
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
+    <div class="content" v-pre>
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/diagonal-traverse/">LeetCode指路</a> 难度：中等</p>
+<p>给你一个大小为 <code>m x n</code> 的矩阵 <code>mat</code> ，请以对角线遍历的顺序，用一个数组返回这个矩阵中的所有元素。</p>
+<span id="more"></span>
+
+<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><p>这题最大的麻烦就在于各种ifelse判断。</p>
+<hr>
+<p>首先，线的走向只有两种，up和down。这是第一个分类点。</p>
+<p>然后，当触碰到边界时，需要更改走向。</p>
+<p>在触碰到边界时，有四条边界，每个边界的处理情况也不一样。</p>
+<hr>
+<p>对于up，会碰到上边界和右边界</p>
+<p>当触碰到上边界时，<code>y++</code>，<code>x</code>不变，也就是<code>右移</code></p>
+<p>当触碰到右边界时<code>x++</code>，<code>y</code>不变，也就是<code>下移</code></p>
+<p>这时就出现了一个问题，当触碰到的是右上角呢？此时如果<code>y++</code>，就会造成数组越界。</p>
+<p>处理1：先判断上边界再判断右边界。在右边界中嵌套判断和处理 。&#x2F;&#x2F;右移不处理会越界</p>
+<p>处理2：先判断右边界再判断上边界。 &#x2F;&#x2F;下移处理不会越界</p>
+<p>上面用的都是 if 和 else if </p>
+<p>对于down，这是对称的，不再赘述。</p>
+<hr>
+<p>所以大体的框架已经出来了。代码如下：</p>
+<pre><code class="highlight cpp"><span class="type">bool</span> state = <span class="literal">true</span>;    <span class="comment">// up 为 true，down 为 false</span>
+<span class="type">int</span> n = mat.<span class="built_in">size</span>();
+<span class="type">int</span> m = mat[<span class="number">0</span>].<span class="built_in">size</span>();
+<span class="type">int</span> x = <span class="number">0</span>;
+<span class="type">int</span> y = <span class="number">0</span>;
+std::vector&lt;<span class="type">int</span>&gt; ans;
+
+<span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n * m; i++) &#123;
+    ans.<span class="built_in">push_back</span>(mat[x][y]);
+    <span class="keyword">if</span> (state) &#123;
+        <span class="comment">// 触碰右边界</span>
+        <span class="keyword">if</span> (y == m - <span class="number">1</span>) &#123;
+            x++;
+            state = !state;
+        &#125;
+        <span class="comment">// 触碰上边界</span>
+        <span class="keyword">else</span> <span class="keyword">if</span> (x == <span class="number">0</span>) &#123;
+            y++;
+            state = !state;
+        &#125;
+        <span class="comment">// 未触碰边界</span>
+        <span class="keyword">else</span> &#123;
+            x--;
+            y++;
+        &#125;
+    &#125; <span class="keyword">else</span> &#123;
+        <span class="comment">// 触碰下边界</span>
+        <span class="keyword">if</span> (x == n - <span class="number">1</span>) &#123;
+            y++;
+            state = !state;
+        &#125;
+        <span class="comment">// 触碰左边界</span>
+        <span class="keyword">else</span> <span class="keyword">if</span> (y == <span class="number">0</span>) &#123;
+            x++;
+            state = !state;
+        &#125;
+        <span class="comment">// 未触碰边界</span>
+        <span class="keyword">else</span> &#123;
+            x++;
+            y--;
+        &#125;
+    &#125;
+&#125;</code></pre>
+
     </div>
     
-    <div class="timeline">
-        <div class="timeline-tail"></div>
-        <div class="timeline-content">
-            <div class="item-time">2024/9/15</div>
-            <a href="/2024/09/15/%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E6%A6%82%E8%BF%B0/">
-                <h3>第一章</h3>
-            </a>
-            <div class="info">
-                
-                <span class="category">
-                    <a href="/categories/TCP-IP/">
-                        <span class="icon">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </span>
-                        TCP/IP
-                    </a>
-                </span>
-                
-                
-            </div>
-        </div>
-    </div>
+    
+    
+    
+    
+    
     
 </div>
 
@@ -290,6 +310,12 @@
         
     </div>
     <script src="/js/main.js"></script>
+    
+    
+
+
+
+
     
 </body>
 </html>

@@ -184,21 +184,21 @@
             
             <span class="tag">
                 
-                <a href="/tags/LeetCode/" style="color: #ffa2c4">
+                <a href="/tags/LeetCode/" style="color: #03a9f4">
                     LeetCode
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Array/" style="color: #ff7d73">
+                <a href="/tags/Array/" style="color: #00a596">
                     Array
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Medium/" style="color: #03a9f4">
+                <a href="/tags/Medium/" style="color: #00bcd4">
                     Medium
                 </a>
             </span>
@@ -220,13 +220,38 @@
 <p>首先第一个想到的，是通过计算整个区间的乘积值，然后通过除法得出答案。然而除法是禁止的，所以pass掉。</p>
 <p>第二个，结果 &#x3D; 左区间乘积 * 右区间乘积。按照重复利用计算结果的思路，我们可以发现，当计算左区间时，n的左区间往往可以通过n-1的左区间和nums[n-1]相乘得到。按照这个思路，n的右区间可以通过 <del>n-1的右区间除以n得到</del> n+1的右区间和nums[n+1]相乘得到。</p>
 <p>从这个角度看，左区间和右区间其实是对称的。那么，我们只需要从左往右计算各个节点的左区间乘积，将结果存储起来。然后再从右往左计算各个节点的右区间，将结果存储起来。最后两个数组相乘得到新的数组，新的数组就是应该返回的答案了。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> n = nums.<span class="built_in">size</span>();</span><br><span class="line"><span class="function">std::vector&lt;<span class="type">int</span>&gt; <span class="title">beforSum</span><span class="params">(n,<span class="number">1</span>)</span></span>;</span><br><span class="line"><span class="function">std::vector&lt;<span class="type">int</span>&gt; <span class="title">afterSum</span><span class="params">(n,<span class="number">1</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">    beforSum[i] = beforSum[i<span class="number">-1</span>] * nums[i<span class="number">-1</span>];</span><br><span class="line">    afterSum[n-i<span class="number">-1</span>] = afterSum[n-i] * nums[n-i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">    beforeSum[i] *= afterSum[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> beforeSum;</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight cpp"><span class="type">int</span> n = nums.<span class="built_in">size</span>();
+<span class="function">std::vector&lt;<span class="type">int</span>&gt; <span class="title">beforSum</span><span class="params">(n,<span class="number">1</span>)</span></span>;
+<span class="function">std::vector&lt;<span class="type">int</span>&gt; <span class="title">afterSum</span><span class="params">(n,<span class="number">1</span>)</span></span>;
+
+<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;
+    beforSum[i] = beforSum[i<span class="number">-1</span>] * nums[i<span class="number">-1</span>];
+    afterSum[n-i<span class="number">-1</span>] = afterSum[n-i] * nums[n-i];
+&#125;
+
+<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;
+    beforeSum[i] *= afterSum[i];
+&#125;
+<span class="keyword">return</span> beforeSum;</code></pre>
 
 <h5 id="方法2：优化-O-1-空间复杂度"><a href="#方法2：优化-O-1-空间复杂度" class="headerlink" title="方法2：优化-O(1)空间复杂度"></a>方法2：优化-O(1)空间复杂度</h5><p>在方法一种，我们已经通过返回beforeSum来减少空间复杂度了，那么能不能在计算出beforeSum后，不再使用额外的数组空间来计算出答案呢？答案是肯定的。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> temp = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = n<span class="number">-2</span>; i &gt; <span class="number">0</span> ; i--)&#123;</span><br><span class="line">    temp *= nums[i];</span><br><span class="line">    beforSum[i<span class="number">-1</span>] *= temp;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight cpp"><span class="type">int</span> temp = <span class="number">1</span>;
+<span class="keyword">for</span>(<span class="type">int</span> i = n<span class="number">-2</span>; i &gt; <span class="number">0</span> ; i--)&#123;
+    temp *= nums[i];
+    beforSum[i<span class="number">-1</span>] *= temp;   
+&#125;</code></pre>
 
 <h5 id="方法3：双指针"><a href="#方法3：双指针" class="headerlink" title="方法3：双指针"></a>方法3：双指针</h5><p>这又是一个空间复杂度为O(1)的方法。跟方法2不同的是，它在一个for循环里同时计算左右区间的值并存储到ans中</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> templ = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> tempr = <span class="number">1</span>;</span><br><span class="line"><span class="function">std::vector&lt;<span class="type">int</span>&gt; <span class="title">ans</span><span class="params">(<span class="number">10</span>,<span class="number">1</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;</span><br><span class="line">    ans[i] *= templ;</span><br><span class="line">    ans[n-i<span class="number">-1</span>] *= tempr;</span><br><span class="line">    templ *= nums[i];</span><br><span class="line">    tempr *= nums[n-i<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight cpp"><span class="type">int</span> templ = <span class="number">1</span>;
+<span class="type">int</span> tempr = <span class="number">1</span>;
+<span class="function">std::vector&lt;<span class="type">int</span>&gt; <span class="title">ans</span><span class="params">(<span class="number">10</span>,<span class="number">1</span>)</span></span>;
+
+<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++)&#123;
+    ans[i] *= templ;
+    ans[n-i<span class="number">-1</span>] *= tempr;
+    templ *= nums[i];
+    tempr *= nums[n-i<span class="number">-1</span>];
+&#125;</code></pre>
 
     </div>
     

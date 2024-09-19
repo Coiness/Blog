@@ -184,14 +184,14 @@
             
             <span class="tag">
                 
-                <a href="/tags/LeetCode/" style="color: #ffa2c4">
+                <a href="/tags/LeetCode/" style="color: #ff7d73">
                     LeetCode
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Array/" style="color: #03a9f4">
+                <a href="/tags/Array/" style="color: #00bcd4">
                     Array
                 </a>
             </span>
@@ -218,10 +218,35 @@
 <p>需要注意的点是，当首位到末位都是9时，加一会使数字的位数增加，需要多加一位。</p>
 <p>（如：9 9 9 9 +1 &#x3D; 1 0 0 0 0）</p>
 <h5 id="方法1：找出最长的后缀9"><a href="#方法1：找出最长的后缀9" class="headerlink" title="方法1：找出最长的后缀9"></a>方法1：找出最长的后缀9</h5><p>对数组digits进行一次逆序遍历，找出第一个不为9的数字，将其加1并后续的所有元素置零</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = digits.<span class="built_in">size</span>()<span class="number">-1</span>;i &gt;= <span class="number">0</span>;i--)&#123;</span><br><span class="line">    <span class="keyword">if</span>(digits[i] != <span class="number">9</span>)&#123;</span><br><span class="line">        ++digits[i];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j = i + <span class="number">1</span>;j &lt; digits.<span class="built_in">size</span>();j++)&#123;</span><br><span class="line">            digit[j] = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> digits;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">ans</span><span class="params">(digits.size()<span class="number">+1</span>)</span></span>;</span><br><span class="line">ans[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">return</span> ans; </span><br></pre></td></tr></table></figure>
+<pre><code class="highlight cpp"><span class="keyword">for</span>(<span class="type">int</span> i = digits.<span class="built_in">size</span>()<span class="number">-1</span>;i &gt;= <span class="number">0</span>;i--)&#123;
+    <span class="keyword">if</span>(digits[i] != <span class="number">9</span>)&#123;
+        ++digits[i];
+        <span class="keyword">for</span>(<span class="type">int</span> j = i + <span class="number">1</span>;j &lt; digits.<span class="built_in">size</span>();j++)&#123;
+            digit[j] = <span class="number">0</span>;
+        &#125;
+        <span class="keyword">return</span> digits;
+     &#125;
+&#125;
+
+<span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">ans</span><span class="params">(digits.size()<span class="number">+1</span>)</span></span>;
+ans[<span class="number">0</span>] = <span class="number">1</span>;
+<span class="keyword">return</span> ans;</code></pre>
 
 <h5 id="方法2：逢10进1"><a href="#方法2：逢10进1" class="headerlink" title="方法2：逢10进1"></a>方法2：逢10进1</h5><p>这是很正常的思路，方法1是Leetcode官方给的，对于它先遍历，然后将后续元素置零的处理，我本人不是很喜欢。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> end = digits.<span class="built_in">size</span>()<span class="number">-1</span>;</span><br><span class="line">digits[end]++;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(end != <span class="number">0</span> &amp;&amp; digits[end] == <span class="number">10</span>)&#123;</span><br><span class="line">    digits[end] = <span class="number">0</span>;</span><br><span class="line">    digits[--end]++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(digits[<span class="number">0</span>] == <span class="number">10</span>)&#123;</span><br><span class="line">    digits[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    digits.<span class="built_in">insert</span>(digits.<span class="built_in">begin</span>()，<span class="number">1</span>）；</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> digits;</span><br></pre></td></tr></table></figure>
+<pre><code class="highlight cpp"><span class="type">int</span> end = digits.<span class="built_in">size</span>()<span class="number">-1</span>;
+digits[end]++;
+
+<span class="keyword">while</span>(end != <span class="number">0</span> &amp;&amp; digits[end] == <span class="number">10</span>)&#123;
+    digits[end] = <span class="number">0</span>;
+    digits[--end]++;
+&#125;
+
+<span class="keyword">if</span>(digits[<span class="number">0</span>] == <span class="number">10</span>)&#123;
+    digits[<span class="number">0</span>] = <span class="number">0</span>;
+    digits.<span class="built_in">insert</span>(digits.<span class="built_in">begin</span>()，<span class="number">1</span>）；
+&#125;
+
+<span class="keyword">return</span> digits;</code></pre>
 
 <p>这个方法虽然直观，思路也很自然，缺点应该是缺少一点技巧性</p>
 
