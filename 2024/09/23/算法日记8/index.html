@@ -3,7 +3,7 @@
 <html lang="ch">
 <head>
     <meta charset="utf-8" />
-    <title>算法日记-1 189.轮换数组 | K-ON!!!</title>
+    <title>算法日记-8 LCR 164.破解闯关密码 | K-ON!!!</title>
     <meta name="author" content="Coiness" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,14 +156,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>算法日记-1 189.轮换数组</h1>
+        <h1>算法日记-8 LCR 164.破解闯关密码</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/9/15
+            2024/9/23
         </span>
         
         <span class="category">
@@ -184,22 +184,22 @@
             
             <span class="tag">
                 
-                <a href="/tags/LeetCode/" style="color: #ff7d73">
+                <a href="/tags/LeetCode/" style="color: #00a596">
                     LeetCode
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Array/" style="color: #ffa2c4">
-                    Array
+                <a href="/tags/Medium/" style="color: #ffa2c4">
+                    Medium
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Medium/" style="color: #00a596">
-                    Medium
+                <a href="/tags/Sort/" style="color: #00bcd4">
+                    Sort
                 </a>
             </span>
             
@@ -208,76 +208,38 @@
     </div>
     
     <div class="content" v-pre>
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotate-array/description/">LeetCode指路</a> 难度：中等</p>
-<p>给定一个整数数组 <code>nums</code>，将数组中的元素向右轮转 <code>k</code> 个位置，其中 <code>k</code> 是非负数。</p>
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/description/">LeetCode指路</a> 难度：中等</p>
+<p>闯关游戏需要破解一组密码，闯关组给出的有关密码的线索是：</p>
+<ul>
+<li>一个拥有密码所有元素的非负整数数组 <code>password</code></li>
+<li>密码是 <code>password</code> 中所有元素拼接后得到的最小的一个数</li>
+</ul>
+<p>请编写一个程序返回这个密码。</p>
 <span id="more"></span>
 
-<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定一个整数数组 <code>nums</code>，将数组中的元素向右轮转 <code>k</code> 个位置，其中 <code>k</code> 是非负数。</p>
-<p><strong>示例 1:</strong></p>
-<p><strong>输入:</strong> nums &#x3D; [1,2,3,4,5,6,7], k &#x3D; 3<br><strong>输出:</strong> <code>[5,6,7,1,2,3,4]</code><br><strong>解释:</strong><br>向右轮转 1 步: <code>[7,1,2,3,4,5,6]</code><br>向右轮转 2 步: <code>[6,7,1,2,3,4,5]</code><br>向右轮转 3 步: <code>[5,6,7,1,2,3,4]</code></p>
-<p><strong>示例 2:</strong></p>
-<p><strong>输入</strong>： nums &#x3D; [-1,-100,3,99], k &#x3D; 2<br><strong>输出</strong>： [3,99,-1,-100]<br><strong>解释</strong>:<br>向右轮转 1 步: [99,-1,-100,3]<br>向右轮转 2 步: [3,99,-1,-100]</p>
-<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p><strong>关于特解和边界</strong></p>
-<p>1.当nums.size() &#x3D;&#x3D; 0 || k &#x3D;&#x3D; 0时，直接返回</p>
-<p>2.当 k &gt; n时，实际上是轮转 k%n 位</p>
-<p>3.当 x + k &gt; n时，也是转到了(x + k)%n的位置</p>
-<hr>
-<h5 id="使用额外数组"><a href="#使用额外数组" class="headerlink" title="使用额外数组"></a>使用额外数组</h5><p>新建一个数组，遍历原数组，帮助遍历的数据在新建数组内找到正确的位置。</p>
-<p>最后将新建数组的值拷贝到原数组</p>
-<h5 id="环状替换"><a href="#环状替换" class="headerlink" title="环状替换"></a>环状替换</h5><p>首先，当想到了要尽可能地减少空间开销时，会很自然地从创造一个临时变量开始。我们最早接触的类似操作两数交换，就已经告诉了我们必须要一个临时变量来保证不会有数据在操作中丢失。</p>
-<p>好，现在已经有一个临时变量用来存储数据了，我们先从第一个数据开始吧。</p>
-<pre><code class="highlight cpp">temp = nums[<span class="number">0</span>];
-std::<span class="built_in">swap</span>(temp,nums[(<span class="number">0</span>+k)%n])</code></pre>
-
-<p>现在，temp里面存储的是被覆盖的nums[k]，而nums[k]存储的是位于正确位置的nums[0]</p>
-<p>下一步呢？下一步就是应该为储存在temp中的nums[k]找到它的家了。</p>
-<p>很容易发现，这是个循环。那么什么时候完成一轮循环呢？当他重新回到nums[0]时</p>
-<p>假设走了a圈，一共遍历了b个数据，那么可以得到<strong>an&#x3D;bk</strong></p>
-<p>当第一次回到起点的时候，一定是第一次开始重复处理同一个位置的时候，因为这是循环的开始，也就是说，这时候，就应该改变操作的数据了。</p>
-<p>那么这个an，就应该是n和k的最小公倍数，an &#x3D; lcm(n,k)</p>
-<p>那么我们遍历了多少个数据呢？<strong>b&#x3D;lcm(n,k)&#x2F;k</strong></p>
-<p>我们每次都将一个数据放到正确的位置，那么我们这个操作需要操作多少次呢？</p>
-<p><strong>n&#x2F;b &#x3D; n*k&#x2F;lcm(n,k) &#x3D; gcd(n,k)</strong> *须知gcd(n,k) <em>lcm(n,k) &#x3D; nk</em></p>
-<pre><code class="highlight cpp"><span class="keyword">for</span>（<span class="type">int</span> i = <span class="number">0</span>;i &lt; std::<span class="built_in">gcd</span>(n,k);i++）&#123;
-    x = i;
-    temp = nums[x];        <span class="comment">//保存原始数据，否则会被覆盖</span>
-
-    <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>;j &lt; <span class="built_in">lcm</span>(n,k)/k;j++)&#123;
-        std::<span class="built_in">swap</span>(temp,nums[(x+k)%n]);
-        x = x + k;
-    &#125;
+<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><h5 id="方法一：自定义排序"><a href="#方法一：自定义排序" class="headerlink" title="方法一：自定义排序"></a>方法一：自定义排序</h5><p>首先，要清楚这个问题要得到的目标是什么？判断的依据是什么？这个问题的本质是什么？</p>
+<p>思考可以得到，这是一个拼接的问题，要得到一串最小的拼接字符串，本质是排序。</p>
+<p>既然是排序，那么规则是什么？根据问题得，我们想要通过排序得到最小的字符串。那么排序规则就要做到使字符串最小。</p>
+<p>理所当然，我们会先想到，小的排在前面，大的排在后面。然而样例告诉我们，当遇到30、34和3时，这个规则是行不通的。为什么行不通？因为我们要的是拼接的string，而不是int，两个根本就不是一回事！</p>
+<p>那么我们就用string来，那怎么比较呢？这个规则是该怎么定呢?</p>
+<p>我们用贪心来解答。先不要考虑三个或多个数字，比较嘛，就两个两个来。30和34谁排前面，就按计算的结果来，3034 &lt; 3430 ，所以应该30排在前面，3和30谁排在前面 330 &gt; 303。结果显而易见，排序规则也是如此。<code>x+y &lt; y+x</code>字符串的拼接。</p>
+<p>那么我们来梳理一下我们要做什么</p>
+<p>首先将int数组转换为string数组</p>
+<pre><code class="highlight cpp">std::vector&lt;std::string&gt; ans;
+<span class="keyword">for</span>(<span class="type">int</span> num:password)&#123;
+    ans.<span class="built_in">push_back</span>(std::<span class="built_in">to_string</span>(num));
 &#125;</code></pre>
 
-<p>第一个循环可以说，将数组分为了gcd(n,k)个集合，前gcd(n,k)个数据就是每个集合的开头。</p>
-<p>轮换的操作只可能在集合中变换。<em>因为存在循环</em></p>
-<p>第二个循环则是在每个集合中的遍历操作。</p>
-<h5 id="数组翻转"><a href="#数组翻转" class="headerlink" title="数组翻转"></a>数组翻转</h5><p>该方法基于以下事实：</p>
-<p>当我们将数组向右移动k次时，最后的 k%n 位会移动到数组头部，其余的数据会向后移动 k%n 个位置。</p>
-<p>以n &#x3D; 7，k &#x3D; 3举例</p>
-<table>
-<thead>
-<tr>
-<th align="left">操作</th>
-<th>结果</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">原始数组</td>
-<td>1 2 3 4 5 6 7</td>
-</tr>
-<tr>
-<td align="left">翻转所有元素</td>
-<td>7 6 5 4 3 2 1</td>
-</tr>
-<tr>
-<td align="left">翻转[0,k%n -1]区间的元素</td>
-<td>5 6 7 4 3 2 1</td>
-</tr>
-<tr>
-<td align="left">翻转[k%n,n]区间的元素</td>
-<td>5 6 7 1 2 3 4</td>
-</tr>
-</tbody></table>
+<p>然后创造排序规则</p>
+<pre><code class="highlight cpp"><span class="function"><span class="type">bool</span> <span class="title">compare</span><span class="params">(<span class="type">const</span> string &amp;a, <span class="type">const</span> string &amp;b)</span></span>&#123;
+    <span class="keyword">return</span> a+b &lt; b+a;
+&#125;</code></pre>
+
+<p>最后调用实现，并将答案转换为string输出就行了</p>
+<pre><code class="highlight cpp">std::string ans_str;
+<span class="keyword">for</span>(std::string str:ans)&#123;
+    ans_str += str;
+&#125;</code></pre>
 
     </div>
     
