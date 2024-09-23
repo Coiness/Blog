@@ -3,7 +3,7 @@
 <html lang="ch">
 <head>
     <meta charset="utf-8" />
-    <title>算法日记7 | K-ON!!!</title>
+    <title>算法日记-7 48.旋转图像 | K-ON!!!</title>
     <meta name="author" content="Coiness" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,7 +156,7 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>算法日记7</h1>
+        <h1>算法日记-7 48.旋转图像</h1>
     </div>
     <div class="info">
         <span class="date">
@@ -184,21 +184,21 @@
             
             <span class="tag">
                 
-                <a href="/tags/LeetCode/" style="color: #ff7d73">
+                <a href="/tags/LeetCode/" style="color: #ffa2c4">
                     LeetCode
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Array/" style="color: #00bcd4">
+                <a href="/tags/Array/" style="color: #ff7d73">
                     Array
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Medium/" style="color: #ff7d73">
+                <a href="/tags/Medium/" style="color: #ffa2c4">
                     Medium
                 </a>
             </span>
@@ -212,6 +212,94 @@
 <p>给定一个 <em>n</em> × <em>n</em> 的二维矩阵 <code>matrix</code> 表示一个图像。请你将图像顺时针旋转 90 度。</p>
 <p>你必须在 <strong><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8E%9F%E5%9C%B0%E7%AE%97%E6%B3%95">原地</a></strong> 旋转图像，这意味着你需要直接修改输入的二维矩阵。<strong>请不要</strong> 使用另一个矩阵来旋转图像。</p>
 <span id="more"></span>
+
+<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><p><code>n == matrix.size() == matrix[i].size()</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">1</th>
+<th align="center">2</th>
+<th align="center">3</th>
+<th align="center">4</th>
+<th align="center">5</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>6</strong></td>
+<td align="center"><strong>7</strong></td>
+<td align="center"><strong>8</strong></td>
+<td align="center"><strong>9</strong></td>
+<td align="center"><strong>10</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>11</strong></td>
+<td align="center"><strong>12</strong></td>
+<td align="center"><strong>13</strong></td>
+<td align="center"><strong>14</strong></td>
+<td align="center"><strong>15</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>16</strong></td>
+<td align="center"><strong>17</strong></td>
+<td align="center"><strong>18</strong></td>
+<td align="center"><strong>19</strong></td>
+<td align="center"><strong>20</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>21</strong></td>
+<td align="center"><strong>22</strong></td>
+<td align="center"><strong>23</strong></td>
+<td align="center"><strong>24</strong></td>
+<td align="center"><strong>25</strong></td>
+</tr>
+</tbody></table>
+<p>纵 <code>x</code> 横 <code>y</code></p>
+<h5 id="方法1：使用辅助数组"><a href="#方法1：使用辅助数组" class="headerlink" title="方法1：使用辅助数组"></a>方法1：使用辅助数组</h5><p>（说实话，这真的不算使用另一个矩阵吗^o^）</p>
+<p>通过观察可以发现，在旋转90度后，第一行的数字出现在了倒数第一列，第二行的数字出现在了倒数第二列……第n行的数字出现在了倒数第n列。</p>
+<p>由此可得等式     <strong>matrix[row][col] &#x3D; matrix<sub>new</sub>[col][n-row-1]</strong></p>
+<p>创建一个辅助数组（矩阵），按照上面的公式移动数字后，再将数值复制回原矩阵。</p>
+<h5 id="方法2：原地旋转"><a href="#方法2：原地旋转" class="headerlink" title="方法2：原地旋转"></a>方法2：原地旋转</h5><p>建议画一个矩阵搭配使用</p>
+<p>旋转90度，对于每一个数字是怎么样的呢？当我们以第一个数字开始研究旋转时，就会发现这个正方形矩阵的对称性。这个时候，我们会想到<code>算法日记-1 189.轮换数组</code>的内容。</p>
+<p>将这个正方形矩阵一层层地剥开，分为多圈。不难看出，每一圈都形成了一个环，而将矩阵进行旋转，就相当于在这个环中进行轮换</p>
+<p>剥出这些环很简单，只需要为每个环找一个起点就好了。我相信读者一定能想到最简单的起点，就是对角线上的起点了。这个想象起来很直观。至于在循环中如何表示起点，首先我们可以拆出<code>n/2</code>个环，这个<code>n/2</code>是个int类型。当<code>n</code>为偶数时，确实可以拆出这么多环，但是当<code>n</code>为奇数时，中间的环其实只有一个<code>1*1</code>的点，这算环吗？根本不用旋转的。我们现在得到了一个大循环：<code>for(int i = 0; i &lt; n/2; i++)</code></p>
+<hr>
+<p>好了，现在我们落实到某一个环<code>i</code>的讨论上。上面讨论过了，这个环其实是一个轮换数组。不难发现，一轮会更新迭代4个元素，而总共有多少轮呢？</p>
+<p>从数学上看：<code>m = 该环的总元素个数/4</code></p>
+<p>从旋转轮换看：<code>m = 边长-1</code></p>
+<p>可以说，将这个环切为元素容量为4的m个封闭的集合。而根据旋转对称来看，很明显，拆成四条长度相等的边，边长为正方形边长-1是再合适不过的。</p>
+<p>所以有：<code>m = n-2*i-1</code>     这个<code>i</code> 表达了了每一个环的边长都是不一样的。</p>
+<hr>
+<p>我们又进了一步，将一个环的问题缩小到了一条边上，我们只需要遍历这条边上的点，再根据情况进行处理就快要成功了。直觉告诉我们，这个旋转一定存在一个规律。</p>
+<p>我们以<code>matrix[i][2]</code>为例，试着进行旋转。首先，这个位置是属于特例的直观和普遍抽象的折中，在不失普遍性的情况下给出的一个具体的例子（当然这个边长是要大于2的）。</p>
+<p>最上面的一条边进行旋转90°，毫无疑问的，一定会落到右边的那条边上，也就是说，转换后的坐标一定落在<code>y = n-i-1</code>上。这是必然的，那么<code>x</code>的坐标就该2发力的。你自己画一张图，不难看出，这个代表数字2的这个边，原本是在左边，现在翻到上面去了。那么我们可以得到<code>x = j</code>，也就是说<strong>matrix[ i ][ 2 ] &#x3D; matrix<sub>new</sub>[ 2 ][ n-i-1 ]</strong></p>
+<p>再稍微抽象一点 <strong>matrix[row][col] &#x3D; matrix<sub>new</sub>[col][n-row-1]</strong> 这不是方法一的公式吗？</p>
+<p>这样我们就解决了上面的那一条边，该轮到下一条边，右边了。</p>
+<p>其实对于剩下的边，处理方法是完全一样的。我们可以说，经过这个公式的处理，<code>matrix[i][2]</code>已经旋转了90度，到达了它应该到达的地方。那么对于其他的点，在经过同样的处理后，也会旋转90度，这是一个函数啊！</p>
+<p>接下来我给出代码</p>
+<pre><code class="highlight cpp"><span class="comment">//大循环，将矩阵拆为环</span>
+<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; n/<span class="number">2</span>; i++)&#123;
+    <span class="type">int</span> temp = matrix[i][i];
+    <span class="type">int</span> j = i;    <span class="comment">//每个环的起点，对角线</span>
+
+    <span class="comment">//边上的循环，边历每一条边</span>
+    <span class="keyword">for</span>(<span class="type">int</span> m = <span class="number">0</span>; m &lt; n<span class="number">-2</span>*i<span class="number">-1</span>; m++,j++)&#123;
+        <span class="comment">//这四条指令是再环上的循环，也是在封闭集内的循环</span>
+        std::<span class="built_in">swap</span>(temp,matrix[j][n-i<span class="number">-1</span>]);
+        std::<span class="built_in">swap</span>(temp,matrix[n-i<span class="number">-1</span>][n-j<span class="number">-1</span>);
+        std::<span class="built_in">swap</span>(temp,matrix[n-j<span class="number">-1</span>][i]);
+        std::<span class="built_in">swap</span>(temp,matrix[i][j]);
+        <span class="comment">//其实可以优化，不使用swap而是直接轮换赋值，但是swap更便于理解</span>
+    &#125;
+&#125;</code></pre>
+
+<h5 id="方法3：用翻转代替旋转"><a href="#方法3：用翻转代替旋转" class="headerlink" title="方法3：用翻转代替旋转"></a>方法3：用翻转代替旋转</h5><p>在<code>算法日记-1 1</code>中使用了翻转来代替轮换。</p>
+<p>在这题中，则用<strong>主对角线翻转+水平翻转</strong>得到了旋转的效果。</p>
+<p>我们在数理上推理一下。</p>
+<p><strong>matrix[ i ][ j ] —主对角线翻转—&gt; matrix[ j ][ i ]</strong></p>
+<p><strong>matrix[ i ][ j ] —水平翻转—&gt; matrix[ i ][ n-j-1 ]</strong></p>
+<p>组合得到：</p>
+<p><strong>matrix[ i ][ j ] &#x3D; matrix<sub>new</sub>[ j ][n-i-1]</strong></p>
+<p>这不是我们方法1和方法2的公式吗，下次记得标明出处。</p>
 
     </div>
     
