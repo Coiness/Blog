@@ -3,7 +3,7 @@
 <html lang="ch">
 <head>
     <meta charset="utf-8" />
-    <title>算法日记-4 485.最大连续1的个数 | K-ON!!!</title>
+    <title>算法日记9 | K-ON!!!</title>
     <meta name="author" content="Coiness" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,14 +156,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>算法日记-4 485.最大连续1的个数</h1>
+        <h1>算法日记9</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/9/17
+            2024/9/24
         </span>
         
         <span class="category">
@@ -184,22 +184,29 @@
             
             <span class="tag">
                 
-                <a href="/tags/LeetCode/" style="color: #ff7d73">
+                <a href="/tags/LeetCode/" style="color: #00a596">
                     LeetCode
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Array/" style="color: #03a9f4">
+                <a href="/tags/Array/" style="color: #ff7d73">
                     Array
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/Easy/" style="color: #00a596">
+                <a href="/tags/Easy/" style="color: #ffa2c4">
                     Easy
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Sort/" style="color: #03a9f4">
+                    Sort
                 </a>
             </span>
             
@@ -208,25 +215,86 @@
     </div>
     
     <div class="content" v-pre>
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/max-consecutive-ones/description/">LeetCode指路</a> 难度：简单</p>
-<p>给定一个二进制数组 <code>nums</code> ， 计算其中最大连续 <code>1</code> 的个数。</p>
+        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/move-zeroes/description/">LeetCode指路</a> 难度：简单</p>
+<p>给定一个数组 <code>nums</code>，编写一个函数将所有 <code>0</code> 移动到数组的末尾，同时保持非零元素的相对顺序。</p>
+<p><strong>请注意</strong> ，必须在不复制数组的情况下原地对数组进行操作。</p>
+<p>冒泡、双指针、stable_partition、remove + fill</p>
 <span id="more"></span>
 
-<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><h5 id="方法一：一次遍历"><a href="#方法一：一次遍历" class="headerlink" title="方法一：一次遍历"></a>方法一：一次遍历</h5><p>如题，通过遍历得出答案。</p>
-<pre><code class="highlight cpp"><span class="type">int</span> ans = <span class="number">0</span>;
-<span class="type">int</span> temp = <span class="number">0</span>;
-<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)&#123;
-    <span class="keyword">if</span>(nums[i] == <span class="number">1</span>)&#123;
-        <span class="keyword">if</span>(++temp &gt; ans)&#123;
-            ans = temp;
-        &#125;
+<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><p>应该算是比较经典的题目了。该题没什么难点，有很多方法可以解答。</p>
+<h5 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h5><p>经典，无需多言</p>
+<h5 id="双指针"><a href="#双指针" class="headerlink" title="双指针"></a>双指针</h5><p>遍历覆盖。相当于只读取非0元素，并且覆盖前面的部分。当后面的指针遍历过后，前面的指针再将剩下的元素置零就完成了。</p>
+<pre><code class="highlight cpp"><span class="type">int</span> i = <span class="number">0</span>;
+<span class="type">int</span> j = <span class="number">0</span>;
+
+<span class="keyword">for</span>(;i &lt; nums.<span class="built_in">size</span>(); i++)&#123;
+    <span class="keyword">if</span>(nums[i] == <span class="number">0</span>)&#123;
     &#125;
     <span class="keyword">else</span>&#123;
-        temp = <span class="number">0</span>;
+        nums[j] = nums[i];
+        j++;
+    &#125;
 &#125;
+
+<span class="keyword">while</span> (i != j)&#123;
+nums[j] = <span class="number">0</span>;
+j++;
 &#125;</code></pre>
 
-<p>挺简单的，很多题解思路都大差不差。</p>
+<h5 id="sort"><a href="#sort" class="headerlink" title="sort?"></a>sort?</h5><p>错误的做法，因为sort是非稳定排序，会改变数据的顺序。</p>
+<h5 id="stable-partitionr"><a href="#stable-partitionr" class="headerlink" title="stable_partitionr"></a>stable_partitionr</h5><p><code>stable_partiton</code>是C++标准库中的一个算法，可以稳定地将数组分为两个部分。</p>
+<pre><code class="highlight cpp"><span class="function"><span class="keyword">template</span>&lt; <span class="keyword">class</span> BidirectionalIterator, <span class="keyword">class</span> UnaryPredicate &gt;</span>
+<span class="function"><span class="type">bool</span> <span class="title">stable_partition</span><span class="params">( BidirectionalIterator first, BidirectionalIterator last,</span></span>
+<span class="params"><span class="function">                      UnaryPredicate p )</span></span>;
+</code></pre>
+
+<p>参数说明：</p>
+<ul>
+<li><p>first：分类的起点</p>
+</li>
+<li><p>last：分类的终点</p>
+</li>
+<li><p>UnaryPredicate p：单参数 谓词</p>
+</li>
+</ul>
+<hr>
+<p>返回bool类型的仿函数就是谓词。如果还看不明白，看看例子就懂了</p>
+<h6 id="表达方式1：普通函数"><a href="#表达方式1：普通函数" class="headerlink" title="表达方式1：普通函数"></a>表达方式1：普通函数</h6><pre><code class="highlight cpp"><span class="function"><span class="type">bool</span> <span class="title">compare</span><span class="params">(<span class="type">const</span> <span class="type">int</span> &amp;x, <span class="type">const</span> <span class="type">int</span> &amp;y)</span></span>&#123;
+    <span class="keyword">return</span> x &gt; y;
+&#125;</code></pre>
+
+<p>看明白了吗？这是双参数谓词，很熟悉不是吗。</p>
+<h6 id="表达方式2：Lambda函数"><a href="#表达方式2：Lambda函数" class="headerlink" title="表达方式2：Lambda函数"></a>表达方式2：Lambda函数</h6><pre><code class="highlight cpp">[捕获列表](参数列表) -&gt; 返回类型 &#123;
+    <span class="comment">// 函数体</span>
+&#125;
+
+
+[x](<span class="type">int</span> y) -&gt; <span class="type">bool</span>&#123;
+    <span class="keyword">return</span> x &gt; y;
+&#125;</code></pre>
+
+<h6 id="表达方式3：仿函数-函数对象"><a href="#表达方式3：仿函数-函数对象" class="headerlink" title="表达方式3：仿函数(函数对象)"></a>表达方式3：仿函数(函数对象)</h6><pre><code class="highlight cpp"><span class="keyword">struct</span> <span class="title class_">Compare</span>&#123;
+    <span class="type">int</span> x;
+
+    <span class="built_in">Compare</span>(<span class="type">int</span> t): <span class="built_in">x</span>(t)&#123;&#125;
+    
+    <span class="function"><span class="type">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">int</span> y)</span> <span class="type">const</span></span>&#123;
+    <span class="keyword">return</span> x &gt; y;
+    &#125;
+&#125;</code></pre>
+
+<hr>
+<p>其实总结一下，跟sort的第三个参数其实是很像的。那么我们也可以简单地得出使用stable_partition函数的代码。</p>
+<pre><code class="highlight cpp">std::<span class="built_in">stable_partition</span>(nums.<span class="built_in">beigin</span>(),nums.<span class="built_in">end</span>(),[](<span class="type">int</span> x)&#123;
+    x != <span class="number">0</span>;
+&#125;)</code></pre>
+
+<p>这样，就可以将数据划分为两半，前部分是<code>x != 0</code></p>
+<p>stable_partition是如何实现的？</p>
+<p>基准情况处理，递归划分，旋转合并，返回新的分隔点。</p>
+<h5 id="remove-fill"><a href="#remove-fill" class="headerlink" title="remove + fill"></a>remove + fill</h5><p>remove函数会移除数组中所有指定的元素，同时返回一个指向新的“结束”位置的迭代器</p>
+<pre><code class="highlight cpp"><span class="keyword">auto</span> it = std::<span class="built_in">remove</span>(nums.<span class="built_in">begin</span>(), nums.<span class="built_in">end</span>(), <span class="number">0</span>);
+std::<span class="built_in">fill</span>(it, nums.<span class="built_in">end</span>(), <span class="number">0</span>);</code></pre>
 
     </div>
     

@@ -3,7 +3,7 @@
 <html lang="ch">
 <head>
     <meta charset="utf-8" />
-    <title>算法日记-4 485.最大连续1的个数 | K-ON!!!</title>
+    <title>Categories: 随笔 | K-ON!!!</title>
     <meta name="author" content="Coiness" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -37,10 +37,6 @@
 
 
 <script src="/js/lib/preview.js"></script>
-
-
-
-
 
 
 
@@ -154,20 +150,25 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>算法日记-4 485.最大连续1的个数</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/9/17
+            <div id="archives">
+    
+    <div class="categories-tags">
+        
+        
+        
+        <span>
+            <a href="/categories/TCP-IP/" style="background: #03a9f4">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                TCP/IP
+            </a>
         </span>
         
-        <span class="category">
-            <a href="/categories/LeetCode/">
+        
+        
+        <span>
+            <a href="/categories/LeetCode/" style="background: #00a596">
                 <span class="icon">
                     <i class="fa-solid fa-bookmark fa-fw"></i>
                 </span>
@@ -176,65 +177,65 @@
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/LeetCode/" style="color: #ff7d73">
-                    LeetCode
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Array/" style="color: #03a9f4">
-                    Array
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Easy/" style="color: #00a596">
-                    Easy
-                </a>
-            </span>
-            
+        
+        <span>
+            <a href="/categories/%E9%9A%8F%E7%AC%94/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
+                <span class="icon">
+                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                </span>
+                随笔
+            </a>
         </span>
+        
+        
+        
         
     </div>
     
-    <div class="content" v-pre>
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/max-consecutive-ones/description/">LeetCode指路</a> 难度：简单</p>
-<p>给定一个二进制数组 <code>nums</code> ， 计算其中最大连续 <code>1</code> 的个数。</p>
-<span id="more"></span>
-
-<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><h5 id="方法一：一次遍历"><a href="#方法一：一次遍历" class="headerlink" title="方法一：一次遍历"></a>方法一：一次遍历</h5><p>如题，通过遍历得出答案。</p>
-<pre><code class="highlight cpp"><span class="type">int</span> ans = <span class="number">0</span>;
-<span class="type">int</span> temp = <span class="number">0</span>;
-<span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++)&#123;
-    <span class="keyword">if</span>(nums[i] == <span class="number">1</span>)&#123;
-        <span class="keyword">if</span>(++temp &gt; ans)&#123;
-            ans = temp;
-        &#125;
-    &#125;
-    <span class="keyword">else</span>&#123;
-        temp = <span class="number">0</span>;
-&#125;
-&#125;</code></pre>
-
-<p>挺简单的，很多题解思路都大差不差。</p>
-
+    <div class="timeline">
+        <div class="timeline-tail"></div>
+        <div class="timeline-content">
+            <div class="item-time">2024/9/23</div>
+            <a href="/2024/09/23/%E9%9A%8F%E7%AC%941/">
+                <h3>随笔1</h3>
+            </a>
+            <div class="info">
+                
+                <span class="category">
+                    <a href="/categories/%E9%9A%8F%E7%AC%94/">
+                        <span class="icon">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </span>
+                        随笔
+                    </a>
+                </span>
+                
+                
+                <span class="tags">
+                    <span class="icon">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </span>
+                    
+                    
+                    <span class="tag">
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB/" style="color: #ffa2c4">
+                            生活
+                        </a>
+                    </span>
+                    
+                    <span class="tag">
+                        
+                        <a href="/tags/%E9%9D%92%E6%98%A5/" style="color: #00bcd4">
+                            青春
+                        </a>
+                    </span>
+                    
+                </span>
+                
+            </div>
+        </div>
     </div>
-    
-    
-    
-    
-    
-    
     
 </div>
 
@@ -266,12 +267,6 @@
         
     </div>
     <script src="/js/main.js"></script>
-    
-    
-
-
-
-
     
 </body>
 </html>
