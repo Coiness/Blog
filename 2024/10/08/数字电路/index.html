@@ -3,7 +3,7 @@
 <html lang="ch">
 <head>
     <meta charset="utf-8" />
-    <title>算法日记-10 215.数组中的第K个最大元素 | K-ON!!!</title>
+    <title>数字电路 | K-ON!!!</title>
     <meta name="author" content="Coiness" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,73 +156,100 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>算法日记-10 215.数组中的第K个最大元素</h1>
+        <h1>数字电路</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/9/25
+            2024/10/8
         </span>
         
-        <span class="category">
-            <a href="/categories/LeetCode/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                LeetCode
-            </a>
-        </span>
-        
-        
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/Sort/" style="color: #ff7d73">
-                    Sort
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/LeetCode/" style="color: #ffa2c4">
-                    LeetCode
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Array/" style="color: #ff7d73">
-                    Array
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Medium/" style="color: #03a9f4">
-                    Medium
-                </a>
-            </span>
-            
-        </span>
         
     </div>
     
     <div class="content" v-pre>
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/kth-largest-element-in-an-array/description/">LeetCode指路</a> 难度：中等</p>
-<p>给定整数数组 <code>nums</code> 和整数 <code>k</code>，请返回数组中第 <code>k</code> 个最大的元素。</p>
-<p>请注意，你需要找的是数组排序后的第 <code>k</code> 个最大的元素，而不是第 <code>k</code> 个不同的元素。</p>
-<p>你必须设计并实现时间复杂度为 <code>O(n)</code> 的算法解决此问题。</p>
-<span id="more"></span>
-
-<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><h5 id="方法一：创建辅助数组"><a href="#方法一：创建辅助数组" class="headerlink" title="方法一：创建辅助数组"></a>方法一：创建辅助数组</h5><p>创建一个大小为k的辅助数组，维护该数组的排序。最后取出该数组的第k位。</p>
-<p>改进：通过swap来避免使用辅助数组。（将前k为当作辅助数组）</p>
+        <p>作业–知识点</p>
+<h5 id="无权码"><a href="#无权码" class="headerlink" title="无权码"></a>无权码</h5><p>无权码指每一位代码没有固定的权值，通常用于不考虑权重的场景。</p>
+<p>如：二进制编码中的<code>000``001``101</code>等，位置不影响整体表现，不强调数值意义。</p>
+<h5 id="恒权码"><a href="#恒权码" class="headerlink" title="恒权码"></a>恒权码</h5><p>指在每一个代码中，每一个代码字中的<code>&quot;1&quot;</code>的个数固定不变</p>
+<p>如：权重为2的三位恒权码<code>011``110``101</code></p>
+<h5 id="8421BCD"><a href="#8421BCD" class="headerlink" title="8421BCD"></a>8421BCD</h5><p>各位的权重为8421，每四位表达一个十进制数</p>
+<p>如：<code>9:1001</code> <code>11:0001 0001</code> <code>52:0101 0010</code></p>
+<h5 id="5421BCD"><a href="#5421BCD" class="headerlink" title="5421BCD"></a>5421BCD</h5><p>同8421BCD，但是权重改变为5421</p>
+<h5 id="余三码"><a href="#余三码" class="headerlink" title="余三码"></a>余三码</h5><p>权重同8421BCD，但是每一位数字都先加3</p>
+<p>如：<code>1 -&gt; 4:0100``9 -&gt; 12:1100``59 -&gt;8 12:1000 1100</code></p>
+<h5 id="移存码"><a href="#移存码" class="headerlink" title="移存码"></a>移存码</h5><p>又称格雷码，相邻数位之间只有一位不同，每次只能改变一个数字</p>
+<table>
+<thead>
+<tr>
+<th>数字</th>
+<th>格雷码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>000</td>
+</tr>
+<tr>
+<td>1</td>
+<td>001</td>
+</tr>
+<tr>
+<td>2</td>
+<td>011</td>
+</tr>
+<tr>
+<td>3</td>
+<td>010</td>
+</tr>
+<tr>
+<td>4</td>
+<td>110</td>
+</tr>
+<tr>
+<td>5</td>
+<td>111</td>
+</tr>
+<tr>
+<td>6</td>
+<td>101</td>
+</tr>
+<tr>
+<td>7</td>
+<td>100</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>00</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>01</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>11</td>
+<td>4</td>
+<td>5</td>
+</tr>
+<tr>
+<td>10</td>
+<td>7</td>
+<td>6</td>
+</tr>
+</tbody></table>
 
     </div>
     
