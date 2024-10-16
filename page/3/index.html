@@ -3,7 +3,7 @@
 <html lang="ch">
 <head>
     <meta charset="utf-8" />
-    <title>算法日记-10 215.数组中的第K个最大元素 | K-ON!!!</title>
+    <title>K-ON!!!</title>
     <meta name="author" content="Coiness" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -42,9 +42,7 @@
 
 
 
-
-
-
+<script src="/js/lib/home.js"></script>
 
 <link rel="stylesheet" href="/css/main.css" />
 
@@ -154,17 +152,39 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>算法日记-10 215.数组中的第K个最大元素</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/9/25
+            <div id="home-head">
+    <div
+        id="home-background"
+        ref="homeBackground"
+        data-images="/images/K-ON_%E4%B8%89%E4%BA%BA%E6%BC%AB%E7%94%BB%E9%A3%8E.webp"
+    ></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>K-ON!!!</h1>
+                <h3></h3>
+                <h5></h5>
+            </div>
         </span>
+    </div>
+</div>
+<div
+    id="home-posts-wrap"
+    ref="homePostsWrap"
+    true
+>
+    <div id="home-posts">
+        
+
+<div class="post">
+    <a href="/2024/09/15/%E7%AE%97%E6%B3%95%E6%97%A5%E8%AE%B01/">
+        <h2 class="post-title">算法日记-1 189.轮换数组</h2>
+    </a>
+    <div class="category-and-date">
         
         <span class="category">
             <a href="/categories/LeetCode/">
@@ -175,62 +195,93 @@
             </a>
         </span>
         
-        
-        <span class="tags">
+        <span class="date">
             <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
+                <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
+            2024/9/15
+        </span>
+        
+        
+    </div>
+    <div class="description">
+        <div class="content" v-pre>
             
+            <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/rotate-array/description/">LeetCode指路</a> 难度：中等</p>
+<p>给定一个整数数组 <code>nums</code>，将数组中的元素向右轮转 <code>k</code> 个位置，其中 <code>k</code> 是非负数。</p>
             
-            <span class="tag">
-                
-                <a href="/tags/Sort/" style="color: #03a9f4">
-                    Sort
-                </a>
-            </span>
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
             
-            <span class="tag">
-                
-                <a href="/tags/LeetCode/" style="color: #00a596">
-                    LeetCode
-                </a>
-            </span>
+            <a href="/tags/LeetCode/" style="color: #ff7d73">LeetCode</a>
+        </span>
+        
+        <span class="tag">
             
-            <span class="tag">
-                
-                <a href="/tags/Array/" style="color: #ff7d73">
-                    Array
-                </a>
-            </span>
+            <a href="/tags/Array/" style="color: #00a596">Array</a>
+        </span>
+        
+        <span class="tag">
             
-            <span class="tag">
-                
-                <a href="/tags/Medium/" style="color: #00a596">
-                    Medium
-                </a>
-            </span>
-            
+            <a href="/tags/Medium/" style="color: #00bcd4">Medium</a>
         </span>
         
     </div>
-    
-    <div class="content" v-pre>
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/kth-largest-element-in-an-array/description/">LeetCode指路</a> 难度：中等</p>
-<p>给定整数数组 <code>nums</code> 和整数 <code>k</code>，请返回数组中第 <code>k</code> 个最大的元素。</p>
-<p>请注意，你需要找的是数组排序后的第 <code>k</code> 个最大的元素，而不是第 <code>k</code> 个不同的元素。</p>
-<p>你必须设计并实现时间复杂度为 <code>O(n)</code> 的算法解决此问题。</p>
-<span id="more"></span>
+    <a href="/2024/09/15/%E7%AE%97%E6%B3%95%E6%97%A5%E8%AE%B01/" class="go-post">阅读全文</a>
+</div>
 
-<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><h5 id="方法一：创建辅助数组"><a href="#方法一：创建辅助数组" class="headerlink" title="方法一：创建辅助数组"></a>方法一：创建辅助数组</h5><p>创建一个大小为k的辅助数组，维护该数组的排序。最后取出该数组的第k位。</p>
-<p>改进：通过swap来避免使用辅助数组。（将前k为当作辅助数组）</p>
+
+        <div class="page-current">
+    
+    <a class="page-num" href="/page/2/">
+        <i class="fa-solid fa-caret-left fa-fw"></i>
+    </a>
+    <a class="page-num" href="/">1</a>
+    <span class="page-omit">...</span>
+    
+    <span class="current">3</span>
+    
+    
+    
+    
+</div>
 
     </div>
     
-    
-    
-    
-    
-    
+    <div id="home-card">
+        <div id="card-style">
+    <div id="card-div">
+        <div class="avatar">
+            <img src="/images/K-ON_Avatar.jpg" alt="avatar" />
+        </div>
+        <div class="name">Coiness</div>
+        <div class="description">
+            <p>Description<br>…</p>
+
+        </div>
+        
+        
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://argvchs.github.io">Argvchs</a>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+    </div>
     
 </div>
 
@@ -262,12 +313,6 @@
         
     </div>
     <script src="/js/main.js"></script>
-    
-    
-
-
-
-
     
 </body>
 </html>

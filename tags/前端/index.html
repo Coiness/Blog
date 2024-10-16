@@ -3,7 +3,7 @@
 <html lang="ch">
 <head>
     <meta charset="utf-8" />
-    <title>算法日记-10 215.数组中的第K个最大元素 | K-ON!!!</title>
+    <title>Tags: 前端 | K-ON!!!</title>
     <meta name="author" content="Coiness" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -37,10 +37,6 @@
 
 
 <script src="/js/lib/preview.js"></script>
-
-
-
-
 
 
 
@@ -154,83 +150,171 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>算法日记-10 215.数组中的第K个最大元素</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/9/25
+            <div id="archives">
+    
+    <div class="categories-tags">
+        
+        
+        
+        <span>
+            <a href="/tags/Web/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                Web
+            </a>
         </span>
         
-        <span class="category">
-            <a href="/categories/LeetCode/">
+        
+        
+        <span>
+            <a href="/tags/%E5%89%8D%E7%AB%AF/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
                 <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                前端
+            </a>
+        </span>
+        
+        
+        
+        
+        
+        <span>
+            <a href="/tags/Sort/" style="background: #00bcd4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                Sort
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/LeetCode/" style="background: #00a596">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
                 </span>
                 LeetCode
             </a>
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/Sort/" style="color: #03a9f4">
-                    Sort
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/LeetCode/" style="color: #00a596">
-                    LeetCode
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Array/" style="color: #ff7d73">
-                    Array
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Medium/" style="color: #00a596">
-                    Medium
-                </a>
-            </span>
-            
+        
+        <span>
+            <a href="/tags/Array/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                Array
+            </a>
         </span>
+        
+        
+        
+        <span>
+            <a href="/tags/Medium/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                Medium
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/Easy/" style="background: #03a9f4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                Easy
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/%E7%94%9F%E6%B4%BB/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                生活
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/%E9%9D%92%E6%98%A5/" style="background: #03a9f4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                青春
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/%E9%81%90%E6%83%B3/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                遐想
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/%E9%9B%8F%E9%9B%81/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                雏雁
+            </a>
+        </span>
+        
         
     </div>
     
-    <div class="content" v-pre>
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/kth-largest-element-in-an-array/description/">LeetCode指路</a> 难度：中等</p>
-<p>给定整数数组 <code>nums</code> 和整数 <code>k</code>，请返回数组中第 <code>k</code> 个最大的元素。</p>
-<p>请注意，你需要找的是数组排序后的第 <code>k</code> 个最大的元素，而不是第 <code>k</code> 个不同的元素。</p>
-<p>你必须设计并实现时间复杂度为 <code>O(n)</code> 的算法解决此问题。</p>
-<span id="more"></span>
-
-<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><h5 id="方法一：创建辅助数组"><a href="#方法一：创建辅助数组" class="headerlink" title="方法一：创建辅助数组"></a>方法一：创建辅助数组</h5><p>创建一个大小为k的辅助数组，维护该数组的排序。最后取出该数组的第k位。</p>
-<p>改进：通过swap来避免使用辅助数组。（将前k为当作辅助数组）</p>
-
+    <div class="timeline">
+        <div class="timeline-tail"></div>
+        <div class="timeline-content">
+            <div class="item-time">2024/10/13</div>
+            <a href="/2024/10/13/React1/">
+                <h3>React1</h3>
+            </a>
+            <div class="info">
+                
+                
+                <span class="tags">
+                    <span class="icon">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </span>
+                    
+                    
+                    <span class="tag">
+                        
+                        <a href="/tags/Web/" style="color: #ffa2c4">
+                            Web
+                        </a>
+                    </span>
+                    
+                    <span class="tag">
+                        
+                        <a href="/tags/%E5%89%8D%E7%AB%AF/" style="color: #03a9f4">
+                            前端
+                        </a>
+                    </span>
+                    
+                </span>
+                
+            </div>
+        </div>
     </div>
-    
-    
-    
-    
-    
-    
     
 </div>
 
@@ -262,12 +346,6 @@
         
     </div>
     <script src="/js/main.js"></script>
-    
-    
-
-
-
-
     
 </body>
 </html>

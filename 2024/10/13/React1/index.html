@@ -3,7 +3,7 @@
 <html lang="ch">
 <head>
     <meta charset="utf-8" />
-    <title>算法日记-10 215.数组中的第K个最大元素 | K-ON!!!</title>
+    <title>React1 | K-ON!!!</title>
     <meta name="author" content="Coiness" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,23 +156,14 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>算法日记-10 215.数组中的第K个最大元素</h1>
+        <h1>React1</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/9/25
-        </span>
-        
-        <span class="category">
-            <a href="/categories/LeetCode/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                LeetCode
-            </a>
+            2024/10/13
         </span>
         
         
@@ -184,29 +175,15 @@
             
             <span class="tag">
                 
-                <a href="/tags/Sort/" style="color: #03a9f4">
-                    Sort
+                <a href="/tags/Web/" style="color: #00bcd4">
+                    Web
                 </a>
             </span>
             
             <span class="tag">
                 
-                <a href="/tags/LeetCode/" style="color: #00a596">
-                    LeetCode
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Array/" style="color: #ff7d73">
-                    Array
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Medium/" style="color: #00a596">
-                    Medium
+                <a href="/tags/%E5%89%8D%E7%AB%AF/" style="color: #00a596">
+                    前端
                 </a>
             </span>
             
@@ -215,14 +192,23 @@
     </div>
     
     <div class="content" v-pre>
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/kth-largest-element-in-an-array/description/">LeetCode指路</a> 难度：中等</p>
-<p>给定整数数组 <code>nums</code> 和整数 <code>k</code>，请返回数组中第 <code>k</code> 个最大的元素。</p>
-<p>请注意，你需要找的是数组排序后的第 <code>k</code> 个最大的元素，而不是第 <code>k</code> 个不同的元素。</p>
-<p>你必须设计并实现时间复杂度为 <code>O(n)</code> 的算法解决此问题。</p>
+        <p>遍历列表渲染、基础条件渲染、复杂条件渲染</p>
 <span id="more"></span>
 
-<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><h5 id="方法一：创建辅助数组"><a href="#方法一：创建辅助数组" class="headerlink" title="方法一：创建辅助数组"></a>方法一：创建辅助数组</h5><p>创建一个大小为k的辅助数组，维护该数组的排序。最后取出该数组的第k位。</p>
-<p>改进：通过swap来避免使用辅助数组。（将前k为当作辅助数组）</p>
+<p>遍历渲染</p>
+<pre><code class="highlight javascript"><span class="keyword">const</span> list = [
+  &#123;<span class="attr">id</span>:<span class="number">1001</span>,<span class="attr">name</span>:<span class="string">&#x27;Vue&#x27;</span>&#125;,
+  &#123;<span class="attr">id</span>:<span class="number">1002</span>,<span class="attr">name</span>:<span class="string">&#x27;React&#x27;</span>&#125;,
+  &#123;<span class="attr">id</span>:<span class="number">1003</span>,<span class="attr">name</span>:<span class="string">&#x27;Angular&#x27;</span>&#125;
+]
+
+ &lt;ul&gt;
+    &#123;list.<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> <span class="language-xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;item.id&#125;</span>&gt;</span>&#123;item.name&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>)&#125;
+ &lt;/ul&gt;</code></pre>
+
+<p>使用list的map方法，遍历循环list，同时将list的内容进行输出。感觉有点像迭代器。</p>
+<p>基础条件渲染</p>
+<p>通过if、else、三元运算符等进行判断。很熟悉把。。。</p>
 
     </div>
     
