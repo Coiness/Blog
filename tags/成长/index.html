@@ -3,7 +3,7 @@
 <html lang="ch">
 <head>
     <meta charset="utf-8" />
-    <title>React1 | K-ON!!!</title>
+    <title>Tags: 成长 | K-ON!!!</title>
     <meta name="author" content="Coiness" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -37,10 +37,6 @@
 
 
 <script src="/js/lib/preview.js"></script>
-
-
-
-
 
 
 
@@ -154,69 +150,191 @@
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
-    <div>
-        <h1>React1</h1>
-    </div>
-    <div class="info">
-        <span class="date">
-            <span class="icon">
-                <i class="fa-solid fa-calendar fa-fw"></i>
-            </span>
-            2024/10/13
+            <div id="archives">
+    
+    <div class="categories-tags">
+        
+        
+        
+        <span>
+            <a href="/tags/Sort/" style="background: #00bcd4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                Sort
+            </a>
         </span>
         
         
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/Web/" style="color: #00bcd4">
-                    Web
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/%E5%89%8D%E7%AB%AF/" style="color: #00a596">
-                    前端
-                </a>
-            </span>
-            
+        
+        <span>
+            <a href="/tags/LeetCode/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                LeetCode
+            </a>
         </span>
+        
+        
+        
+        <span>
+            <a href="/tags/Array/" style="background: #03a9f4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                Array
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/Medium/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                Medium
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/Easy/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                Easy
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/%E7%94%9F%E6%B4%BB/" style="background: #00bcd4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                生活
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/%E9%9D%92%E6%98%A5/" style="background: #ffa2c4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                青春
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/%E9%81%90%E6%83%B3/" style="background: #03a9f4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                遐想
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/%E6%A2%A6%E5%A2%83/" style="background: #00bcd4">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                梦境
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/%E5%9B%9E%E5%BF%86/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                回忆
+            </a>
+        </span>
+        
+        
+        
+        <span>
+            <a href="/tags/%E6%88%90%E9%95%BF/" style="background: linear-gradient(120deg, #9abbf7 0%, #ffbbf4 100%)">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                成长
+            </a>
+        </span>
+        
+        
+        
+        
+        
+        <span>
+            <a href="/tags/%E9%9B%8F%E9%9B%81/" style="background: #ff7d73">
+                <span class="icon">
+                    <i class="fa-solid fa-tags fa-fw"></i>
+                </span>
+                雏雁
+            </a>
+        </span>
+        
         
     </div>
     
-    <div class="content" v-pre>
-        <p>遍历列表渲染、基础条件渲染、复杂条件渲染</p>
-<span id="more"></span>
-
-<p>遍历渲染</p>
-<pre><code class="highlight javascript"><span class="keyword">const</span> list = [
-  &#123;<span class="attr">id</span>:<span class="number">1001</span>,<span class="attr">name</span>:<span class="string">&#x27;Vue&#x27;</span>&#125;,
-  &#123;<span class="attr">id</span>:<span class="number">1002</span>,<span class="attr">name</span>:<span class="string">&#x27;React&#x27;</span>&#125;,
-  &#123;<span class="attr">id</span>:<span class="number">1003</span>,<span class="attr">name</span>:<span class="string">&#x27;Angular&#x27;</span>&#125;
-]
-
- &lt;ul&gt;
-    &#123;list.<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> <span class="language-xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;item.id&#125;</span>&gt;</span>&#123;item.name&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>)&#125;
- &lt;/ul&gt;</code></pre>
-
-<p>使用list的map方法，遍历循环list，同时将list的内容进行输出。感觉有点像迭代器。</p>
-<p>基础条件渲染</p>
-<p>通过if、else、三元运算符等进行判断。很熟悉把。。。</p>
-
+    <div class="timeline">
+        <div class="timeline-tail"></div>
+        <div class="timeline-content">
+            <div class="item-time">2024/10/23</div>
+            <a href="/2024/10/23/%E9%9A%8F%E7%AC%94%E4%B8%89/">
+                <h3>随笔三</h3>
+            </a>
+            <div class="info">
+                
+                <span class="category">
+                    <a href="/categories/%E9%9A%8F%E7%AC%94/">
+                        <span class="icon">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </span>
+                        随笔
+                    </a>
+                </span>
+                
+                
+                <span class="tags">
+                    <span class="icon">
+                        <i class="fa-solid fa-tags fa-fw"></i>
+                    </span>
+                    
+                    
+                    <span class="tag">
+                        
+                        <a href="/tags/%E7%94%9F%E6%B4%BB/" style="color: #00a596">
+                            生活
+                        </a>
+                    </span>
+                    
+                    <span class="tag">
+                        
+                        <a href="/tags/%E6%88%90%E9%95%BF/" style="color: #00bcd4">
+                            成长
+                        </a>
+                    </span>
+                    
+                </span>
+                
+            </div>
+        </div>
     </div>
-    
-    
-    
-    
-    
-    
     
 </div>
 
@@ -248,12 +366,6 @@
         
     </div>
     <script src="/js/main.js"></script>
-    
-    
-
-
-
-
     
 </body>
 </html>

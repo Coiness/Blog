@@ -3,7 +3,7 @@
 <html lang="ch">
 <head>
     <meta charset="utf-8" />
-    <title>算法日记-10 215.数组中的第K个最大元素 | K-ON!!!</title>
+    <title>React-1 | K-ON!!!</title>
     <meta name="author" content="Coiness" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
@@ -156,73 +156,46 @@
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             <div class="article">
     <div>
-        <h1>算法日记-10 215.数组中的第K个最大元素</h1>
+        <h1>React-1</h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <i class="fa-solid fa-calendar fa-fw"></i>
             </span>
-            2024/9/25
+            2024/11/11
         </span>
         
-        <span class="category">
-            <a href="/categories/LeetCode/">
-                <span class="icon">
-                    <i class="fa-solid fa-bookmark fa-fw"></i>
-                </span>
-                LeetCode
-            </a>
-        </span>
-        
-        
-        <span class="tags">
-            <span class="icon">
-                <i class="fa-solid fa-tags fa-fw"></i>
-            </span>
-            
-            
-            <span class="tag">
-                
-                <a href="/tags/Sort/" style="color: #00bcd4">
-                    Sort
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/LeetCode/" style="color: #ff7d73">
-                    LeetCode
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Array/" style="color: #00a596">
-                    Array
-                </a>
-            </span>
-            
-            <span class="tag">
-                
-                <a href="/tags/Medium/" style="color: #ffa2c4">
-                    Medium
-                </a>
-            </span>
-            
-        </span>
         
     </div>
     
     <div class="content" v-pre>
-        <p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/kth-largest-element-in-an-array/description/">LeetCode指路</a> 难度：中等</p>
-<p>给定整数数组 <code>nums</code> 和整数 <code>k</code>，请返回数组中第 <code>k</code> 个最大的元素。</p>
-<p>请注意，你需要找的是数组排序后的第 <code>k</code> 个最大的元素，而不是第 <code>k</code> 个不同的元素。</p>
-<p>你必须设计并实现时间复杂度为 <code>O(n)</code> 的算法解决此问题。</p>
+        <p>本文是视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1zB4y1773E/?spm_id_from=333.880.my_history.page.click&vd_source=2fed842478f2cfc94dc5db871ae15ae8">深入浅出React【真正吃透React知识与底层逻辑】</a>的笔记</p>
 <span id="more"></span>
 
-<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><h5 id="方法一：创建辅助数组"><a href="#方法一：创建辅助数组" class="headerlink" title="方法一：创建辅助数组"></a>方法一：创建辅助数组</h5><p>创建一个大小为k的辅助数组，维护该数组的排序。最后取出该数组的第k位。</p>
-<p>改进：通过swap来避免使用辅助数组。（将前k为当作辅助数组）</p>
+<h3 id="从JSX到DOM"><a href="#从JSX到DOM" class="headerlink" title="从JSX到DOM"></a>从JSX到DOM</h3><p>JSX代码 &#x3D;&gt; Babel &#x3D;&gt; React.createElement &#x3D;&gt; ReactElment &#x3D;&gt; 虚拟DOM &#x3D;&gt;ReactDOM.render() &#x3D;&gt; 真实DOM</p>
+<p>Q1 为什么要使用JSX语法？</p>
+<p>A1 JSX语法本质上是JS语法的拓展，经过Babel处理，会变为JS语法。这个JS语法，调用React.createElement，返回一个ReactElement。</p>
+<p>Q2 既然如此，为什么不直接用React.creatElement来进行React元素的创建？</p>
+<p>A2 你怎么不写机器码</p>
+<p>Q3 React.createElement干了什么</p>
+<p>A3  入参 &#x3D;&gt; 处理 &#x3D;&gt; 返回</p>
+<p>入参：type、config、children。</p>
+<p>type:标识节点类型（如”h1”,”div”）</p>
+<p>config:以对象形式传入，属性以键值对的形式存储在其中(如 key &#x3D; 1010 className &#x3D; app)</p>
+<p>children:子节点子元素的内容   </p>
+<p>  </p>
+<p>处理：二次处理key,ref,self,source四个属性值 &#x3D;&gt; 遍历config，筛选可以提进props的属性 &#x3D;&gt; 提取子元素，推入childArray (也即props.children)数组 &#x3D;&gt; 格式化defaultProps &#x3D;&gt; 结合以上数据进行入参，发起ReactElement调用</p>
+<p>返回：ReactElement(type,key,ref,self,source,ReactCurrentOwner.current,props)</p>
+<p>总结：将数据格式化为符合ReactElement参数的形式，传入后返回React对象</p>
+<p>Q4 这个ReactElement又是干什么的</p>
+<p>A4 将数据组装为一个ReactElement对象实例并返回。这个对象实例，本质上是一个描述DOM节点的JS对象，也就是虚拟DOM</p>
+<p>Q5 虚拟DOM如何转换为真实DOM</p>
+<p>A5 使用ReactDOM.render。</p>
+<p>ReactDOM.render接收3个参数，Element,container,[callback]，</p>
+<p>Element就是需要渲染的元素，container就是渲染的挂载节点，callback回调函数，可以来处理渲染结束后的逻辑</p>
+<p>总结：</p>
+<p>JSX &#x3D;&gt; Babel &#x3D;&gt; React.createElement &#x3D;&gt; ReactElement &#x3D;&gt; 虚拟DOM &#x3D;&gt; ReactDOM.render &#x3D;&gt; 真实DOM</p>
 
     </div>
     
